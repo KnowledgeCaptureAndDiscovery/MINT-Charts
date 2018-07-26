@@ -145,11 +145,21 @@
         $.each(rawData, function(index, item) {
             data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
         })
-        $.getJSON("CYCLES_Sorghum_AgBiomass_Precip10PercIncr.json").done(function(rawData) {
-            var data1 = []
-            $.each(rawData, function(index, item) {
-                data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-            })
+    $.getJSON("CYCLESsorghum_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
+        var data1 = []
+        $.each(rawData, function(index, item) {
+            data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+        })
+    $.getJSON("CYCLESmaize_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
+        var data2 = []
+        $.each(rawData, function(index, item) {
+            data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+        })
+    $.getJSON("CYCLESpeanuts_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
+        var data3 = []
+        $.each(rawData, function(index, item) {
+            data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+        })
         Highcharts.chart('Chart1', {
             chart: {
                 zoomType: 'x'
@@ -174,14 +184,14 @@
             },
             yAxis: {
                 title: {
-                    text: 'Mkg',
+                    text: 'kg/Ha',
                     style: {
                         fontSize: '11px'
                     },
                 },
                 min: 0,
-                max: 800,
-                tickInterval: 400   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
+                max: 900,
+                tickInterval: 450   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
             },
             tooltip: {
                 positioner: function() {
@@ -206,30 +216,42 @@
                 lineWidth: 1,
                 color: '#18770b'  // green
             },{
-                name: 'CYCLES Sorghum Agr Biomass',
+                name: 'CYCLES Sorghum Baseline Agr Biomass',
                 data: data1,
+                lineWidth: 1,
+                color: '#18770b'  // green
+            },{
+                name: 'CYCLES Maize Baseline Agr Biomass',
+                data: data2,
+                lineWidth: 1,
+                color: '#18770b'  // green
+            },{
+                name: 'CYCLES Peanuts Baseline Agr Biomass',
+                data: data3,
                 lineWidth: 1,
                 color: '#18770b'  // green
             }],
         });
-      })
-      })
+    })
+    })
+    })
+    })
 
-    $.getJSON("CLIMIS_WPFsorghum-white-malwa3.5kg_CentralEquatoria.json").done(function(rawData) {
+    $.getJSON("CLIMIS_WFPwhiteSorghum_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
         var data = []
         $.each(rawData, function(index, item) {
             data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
         })
-        $.getJSON("CLIMIS_WPFmaize-malwa3.5kg_CentralEquatoria.json").done(function(rawData) {
-            var data1 = []
-            $.each(rawData, function(index, item) {
-                data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-            })
-            $.getJSON("CLIMIS_DriedCassava-malwa3.5kg_CentralEquatoria.json").done(function(rawData) {
-                var data2 = []
-                $.each(rawData, function(index, item) {
-                    data2.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-                })
+    $.getJSON("CLIMIS_WFPmaize_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
+        var data1 = []
+        $.each(rawData, function(index, item) {
+            data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+        })
+    $.getJSON("CLIMIS_WFPchickpea_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
+        var data2 = []
+        $.each(rawData, function(index, item) {
+            data2.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+        })
         Highcharts.chart('Chart2', {
             chart: {
                 // type: 'column',
@@ -255,7 +277,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Malawa 3.5kg',
+                    text: 'South Sudan Pounds per Malawa 3.5kg',
                     style: {
                         fontSize: '11px'
                     },
@@ -291,7 +313,7 @@
                 color: '#efcf00',   // gold
                 fillOpacity: 0.4
             },{
-                name: 'Cassava',
+                name: 'Peanuts',
                 data: data2,
                 lineWidth: 1,
                 color: '#a8124e',   // fuschia
@@ -302,11 +324,16 @@
       })
       })
 
-      $.getJSON("CYCLES_Sorghum_Precip_Baseline_mm.json").done(function(rawData) {
+      $.getJSON("CYCLESsorghum_BaselinePrecipitation.json").done(function(rawData) {
           var data = []
           $.each(rawData, function(index, item) {
               data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-          })
+      })
+      $.getJSON("CYCLESsorghum_BaselineRefET.json").done(function(rawData) {
+          var data1 = []
+          $.each(rawData, function(index, item) {
+              data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+      })
           Highcharts.chart('Chart3', {
               title: {
                   text: 'Precipitation'
@@ -315,7 +342,7 @@
                   text: 'CYCLES Model Output'
               },
               chart: {
-                  type: 'column',
+                  //type: 'column',
                   zoomType: 'x'
               },
               xAxis: {
@@ -367,12 +394,28 @@
                   data: data,
                   lineWidth: 1,
                   color: '#0e9ba0'  // teal
+              },{
+                  name: 'Reference ET',
+                  data: data1,
+                  lineWidth: 1,
+                  color: '#0e9ba0'  // teal
               }],
           });
-        })
+      })
+      })
 
-      $.getJSON("CYCLES_Runoff_mm-day.json").done(function(rawData) {
+      $.getJSON("CYCLESsorghum_BaselineMinTemp.json").done(function(rawData) {
           var data = []
+          $.each(rawData, function(index, item) {
+              data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+          })
+      $.getJSON("CYCLESsorghum_BaselineMaxTemp.json").done(function(rawData) {
+          var data1 = []
+          $.each(rawData, function(index, item) {
+              data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+          })
+      $.getJSON("CYCLESsorghum_BaselineAvgTemp.json").done(function(rawData) {
+          var data2 = []
           $.each(rawData, function(index, item) {
               data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
           })
@@ -382,7 +425,7 @@
                   zoomType: 'x'
               },
               title: {
-                  text: 'Runoff'
+                  text: 'Temperature'
               },
               subtitle: {
                   text: 'CYCLES Model Output'
@@ -401,7 +444,7 @@
               },
               yAxis: {
                   title: {
-                      text: 'mm/day',
+                      text: 'Degrees Celcius',
                       style: {
                           fontSize: '11px'
                       },
@@ -425,13 +468,25 @@
               //     enabled: false
               // },
               series: [{
-                  name: 'Runoff',
+                  name: 'Minimum Temperature',
                   data: data,
+                  lineWidth: 1,
+                  color: '#0306ba'  // blue
+              },{
+                  name: 'Maximum Temperature',
+                  data: data1,
+                  lineWidth: 1,
+                  color: '#0306ba'  // blue
+              },{
+                  name: 'Average Temperature',
+                  data: data2,
                   lineWidth: 1,
                   color: '#0306ba'  // blue
               }],
           });
-        })
+      })
+      })
+      })
   });
 </script>
 
