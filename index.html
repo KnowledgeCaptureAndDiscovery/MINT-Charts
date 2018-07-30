@@ -174,9 +174,9 @@
                         fontSize: '11px'
                     },
                 },
-                // min: 0,
-                // max: 800,
-                // tickInterval: 400   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
+                min: 0,
+                max: 800,
+                tickInterval: 400   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
             },
             tooltip: {
                 positioner: function() {
@@ -249,7 +249,10 @@
                     style: {
                         fontSize: '11px'
                     },
-                }
+                },
+                min: 0,
+                max: 2000,
+                tickInterval: 1000   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
             },
             tooltip: {
                 positioner: function() {
