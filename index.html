@@ -11,7 +11,7 @@
     <title>Discover South Sudan</title></br>
 
     <center><strong><font size="5" font face="arial">Discover South Sudan</font></strong></br>
-    Data shown is from <a href="http://workflow.isi.edu/MINT/results/20180722/">http://workflow.isi.edu/MINT/results/20180722/baseline/</a> and <a href="http://climis-southsudan.org">http://climis-southsudan.org</a></center></br></br>
+    Data shown is from <a href="http://workflow.isi.edu/MINT/results/20180709/precip_5_percent_inc/">http://workflow.isi.edu/MINT/results/20180709/precip_5_percent_inc/</a> and <a href="http://climis-southsudan.org">http://climis-southsudan.org</a></center></br></br>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
@@ -145,11 +145,6 @@
         $.each(rawData, function(index, item) {
             data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
         })
-        $.getJSON("CYCLESsorghum_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
-            var data1 = []
-            $.each(rawData, function(index, item) {
-                data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-            })
         Highcharts.chart('Chart1', {
             chart: {
                 zoomType: 'x'
@@ -158,7 +153,7 @@
                 text: 'Crop Production'
             },
             subtitle: {
-                text: 'MINT Workflow Output, CYCLES Model Output'
+                text: 'MINT Workflow Output'
             },
             xAxis: {
                 type: 'datetime',
@@ -179,9 +174,9 @@
                         fontSize: '11px'
                     },
                 },
-                // min: 0,
-                // max: 800,
-                // tickInterval: 400   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
+                min: 0,
+                max: 800,
+                tickInterval: 400   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
             },
             tooltip: {
                 positioner: function() {
@@ -205,31 +200,25 @@
                 data: data,
                 lineWidth: 1,
                 color: '#18770b'  // green
-            },{
-                name: 'CYCLES Sorghum Agr Biomass',
-                data: data1,
-                lineWidth: 1,
-                color: '#18770b'  // green
             }],
         });
       })
-      })
 
-    $.getJSON("CLIMIS_WFPwhiteSorghum_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
+    $.getJSON("CLIMIS_WFPchickpea_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
         var data = []
         $.each(rawData, function(index, item) {
             data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
         })
-    $.getJSON("CLIMIS_WFPmaize_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
-        var data1 = []
-        $.each(rawData, function(index, item) {
-            data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-        })
-    $.getJSON("CLIMIS_WFPchickpea_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
-        var data2 = []
-        $.each(rawData, function(index, item) {
-            data2.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-        })
+        $.getJSON("CLIMIS_WFPmaize_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
+            var data1 = []
+            $.each(rawData, function(index, item) {
+                data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+            })
+            $.getJSON("CYCLESpeanuts_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
+                var data2 = []
+                $.each(rawData, function(index, item) {
+                    data2.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+                })
         Highcharts.chart('Chart2', {
             chart: {
                 // type: 'column',
@@ -255,7 +244,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'South Sudan Pounds per Malawa 3.5kg',
+                    text: 'Malawa 3.5kg',
                     style: {
                         fontSize: '11px'
                     },
@@ -291,7 +280,7 @@
                 color: '#efcf00',   // gold
                 fillOpacity: 0.4
             },{
-                name: 'Peanuts',
+                name: 'Cassava',
                 data: data2,
                 lineWidth: 1,
                 color: '#a8124e',   // fuschia
@@ -306,7 +295,7 @@
           var data = []
           $.each(rawData, function(index, item) {
               data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-      })
+          })
           Highcharts.chart('Chart3', {
               title: {
                   text: 'Precipitation'
@@ -315,7 +304,7 @@
                   text: 'CYCLES Model Output'
               },
               chart: {
-                  //type: 'column',
+                  type: 'column',
                   zoomType: 'x'
               },
               xAxis: {
@@ -369,7 +358,7 @@
                   color: '#0e9ba0'  // teal
               }],
           });
-      })
+        })
 
       $.getJSON("CYCLESsorghum_BaselineAvgTemp.json").done(function(rawData) {
           var data = []
@@ -378,11 +367,10 @@
           })
           Highcharts.chart('Chart4', {
               chart: {
-                  type: 'line',
                   zoomType: 'x'
               },
               title: {
-                  text: 'Temperature'
+                  text: 'Average Temperature'
               },
               subtitle: {
                   text: 'CYCLES Model Output'
@@ -401,7 +389,7 @@
               },
               yAxis: {
                   title: {
-                      text: 'Degrees Celcius',
+                      text: 'Degrees Celcium',
                       style: {
                           fontSize: '11px'
                       },
@@ -425,13 +413,13 @@
               //     enabled: false
               // },
               series: [{
-                  name: 'Average Temperature',
+                  name: 'Temperature',
                   data: data,
                   lineWidth: 1,
                   color: '#f46b42'  // orangered
-              }]
+              }],
           });
-      })
+        })
   });
 </script>
 
