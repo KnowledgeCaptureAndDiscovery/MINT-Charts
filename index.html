@@ -140,26 +140,16 @@
         }
     };
 
-    $.getJSON("MINT_Sorghum_Production_Baseline.json").done(function(rawData) {
-        var data = []
-        $.each(rawData, function(index, item) {
-            data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-        })
-    $.getJSON("CYCLESsorghum_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
-        var data1 = []
-        $.each(rawData, function(index, item) {
-            data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-        })
-    $.getJSON("CYCLESmaize_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
-        var data2 = []
-        $.each(rawData, function(index, item) {
-            data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-        })
-    $.getJSON("CYCLESpeanuts_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
-        var data3 = []
-        $.each(rawData, function(index, item) {
-            data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-        })
+    // $.getJSON("MINT_Sorghum_Production_Baseline.json").done(function(rawData) {
+    //     var data = []
+    //     $.each(rawData, function(index, item) {
+    //         data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+    //     })
+        $.getJSON("CYCLESsorghum_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
+            var data1 = []
+            $.each(rawData, function(index, item) {
+                data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
+            })
         Highcharts.chart('Chart1', {
             chart: {
                 zoomType: 'x'
@@ -184,14 +174,14 @@
             },
             yAxis: {
                 title: {
-                    text: 'kg/Ha',
+                    text: 'Mkg',
                     style: {
                         fontSize: '11px'
                     },
                 },
                 min: 0,
-                max: 900,
-                tickInterval: 450   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
+                max: 800,
+                tickInterval: 400   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
             },
             tooltip: {
                 positioner: function() {
@@ -210,32 +200,22 @@
             legend: {
                 enabled: false
             },
-            series: [{
-                name: 'MINT Sorghum Production',
-                data: data,
-                lineWidth: 1,
-                color: '#18770b'  // green
-            },{
-                name: 'CYCLES Sorghum Baseline Agr Biomass',
+            series: [
+            //   {
+            //     name: 'MINT Sorghum Production',
+            //     data: data,
+            //     lineWidth: 1,
+            //     color: '#18770b'  // green
+            // },
+            {
+                name: 'CYCLES Sorghum Agr Biomass',
                 data: data1,
-                lineWidth: 1,
-                color: '#18770b'  // green
-            },{
-                name: 'CYCLES Maize Baseline Agr Biomass',
-                data: data2,
-                lineWidth: 1,
-                color: '#18770b'  // green
-            },{
-                name: 'CYCLES Peanuts Baseline Agr Biomass',
-                data: data3,
                 lineWidth: 1,
                 color: '#18770b'  // green
             }],
         });
-    })
-    })
-    })
-    })
+      })
+      // })
 
     $.getJSON("CLIMIS_WFPwhiteSorghum_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
         var data = []
@@ -329,11 +309,6 @@
           $.each(rawData, function(index, item) {
               data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
       })
-      $.getJSON("CYCLESsorghum_BaselineRefET.json").done(function(rawData) {
-          var data1 = []
-          $.each(rawData, function(index, item) {
-              data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-      })
           Highcharts.chart('Chart3', {
               title: {
                   text: 'Precipitation'
@@ -394,14 +369,8 @@
                   data: data,
                   lineWidth: 1,
                   color: '#0e9ba0'  // teal
-              },{
-                  name: 'Reference ET',
-                  data: data1,
-                  lineWidth: 1,
-                  color: '#0e9ba0'  // teal
               }],
           });
-      })
       })
 
       $.getJSON("CYCLESsorghum_BaselineMinTemp.json").done(function(rawData) {
@@ -421,7 +390,7 @@
           })
           Highcharts.chart('Chart4', {
               chart: {
-                  type: 'column',
+                  type: 'line',
                   zoomType: 'x'
               },
               title: {
@@ -476,12 +445,12 @@
                   name: 'Maximum Temperature',
                   data: data1,
                   lineWidth: 1,
-                  color: '#0306ba'  // blue
+                  color: '#f46b42'  // orangered
               },{
                   name: 'Average Temperature',
                   data: data2,
                   lineWidth: 1,
-                  color: '#0306ba'  // blue
+                  color: '#6f8e1b'  // grassgreen
               }],
           });
       })
