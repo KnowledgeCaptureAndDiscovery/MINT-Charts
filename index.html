@@ -11,7 +11,7 @@
     <title>Discover South Sudan</title></br>
 
     <center><strong><font size="5" font face="arial">Discover South Sudan</font></strong></br>
-    Data shown is from <a href="http://workflow.isi.edu/MINT/results/20180709/precip_5_percent_inc/">http://workflow.isi.edu/MINT/results/20180709/precip_5_percent_inc/</a> and <a href="http://climis-southsudan.org">http://climis-southsudan.org</a></center></br></br>
+    Data shown is from <a href="http://workflow.isi.edu/MINT/results/20180722/">http://workflow.isi.edu/MINT/results/20180722/baseline/</a> and <a href="http://climis-southsudan.org">http://climis-southsudan.org</a></center></br></br>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
@@ -140,24 +140,11 @@
         }
     };
 
-<<<<<<< HEAD
     $.getJSON("MINT_Sorghum_Production_Baseline.json").done(function(rawData) {
         var data = []
         $.each(rawData, function(index, item) {
             data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
         })
-=======
-    // $.getJSON("MINT_Sorghum_Production_Baseline.json").done(function(rawData) {
-    //     var data = []
-    //     $.each(rawData, function(index, item) {
-    //         data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-    //     })
-        $.getJSON("CYCLESsorghum_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
-            var data1 = []
-            $.each(rawData, function(index, item) {
-                data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-            })
->>>>>>> 979c668b462101d7dea873c2e7cbda905101e4f1
         Highcharts.chart('Chart1', {
             chart: {
                 zoomType: 'x'
@@ -187,9 +174,9 @@
                         fontSize: '11px'
                     },
                 },
-                min: 0,
-                max: 800,
-                tickInterval: 400   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
+                // min: 0,
+                // max: 800,
+                // tickInterval: 400   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
             },
             tooltip: {
                 positioner: function() {
@@ -208,31 +195,15 @@
             legend: {
                 enabled: false
             },
-<<<<<<< HEAD
             series: [{
                 name: 'MINT Sorghum Production',
                 data: data,
-=======
-            series: [
-            //   {
-            //     name: 'MINT Sorghum Production',
-            //     data: data,
-            //     lineWidth: 1,
-            //     color: '#18770b'  // green
-            // },
-            {
-                name: 'CYCLES Sorghum Agr Biomass',
-                data: data1,
->>>>>>> 979c668b462101d7dea873c2e7cbda905101e4f1
                 lineWidth: 1,
                 color: '#18770b'  // green
             }],
         });
       })
-<<<<<<< HEAD
-=======
-      // })
->>>>>>> 979c668b462101d7dea873c2e7cbda905101e4f1
+
 
     $.getJSON("CLIMIS_WFPchickpea_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
         var data = []
@@ -325,11 +296,7 @@
           var data = []
           $.each(rawData, function(index, item) {
               data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-<<<<<<< HEAD
           })
-=======
-      })
->>>>>>> 979c668b462101d7dea873c2e7cbda905101e4f1
           Highcharts.chart('Chart3', {
               title: {
                   text: 'Precipitation'
@@ -392,11 +359,7 @@
                   color: '#0e9ba0'  // teal
               }],
           });
-<<<<<<< HEAD
         })
-=======
-      })
->>>>>>> 979c668b462101d7dea873c2e7cbda905101e4f1
 
       $.getJSON("CYCLESsorghum_BaselineAvgTemp.json").done(function(rawData) {
           var data = []
@@ -405,10 +368,6 @@
           })
           Highcharts.chart('Chart4', {
               chart: {
-<<<<<<< HEAD
-=======
-                  type: 'line',
->>>>>>> 979c668b462101d7dea873c2e7cbda905101e4f1
                   zoomType: 'x'
               },
               title: {
@@ -458,21 +417,7 @@
                   name: 'Temperature',
                   data: data,
                   lineWidth: 1,
-<<<<<<< HEAD
                   color: '#f46b42'  // orangered
-=======
-                  color: '#0306ba'  // blue
-              },{
-                  name: 'Maximum Temperature',
-                  data: data1,
-                  lineWidth: 1,
-                  color: '#f46b42'  // orangered
-              },{
-                  name: 'Average Temperature',
-                  data: data2,
-                  lineWidth: 1,
-                  color: '#6f8e1b'  // grassgreen
->>>>>>> 979c668b462101d7dea873c2e7cbda905101e4f1
               }],
           });
         })
