@@ -14,14 +14,8 @@
     Data shown is from <a href="http://workflow.isi.edu/MINT/results/20180722/">http://workflow.isi.edu/MINT/results/20180722/baseline/</a> and <a href="http://climis-southsudan.org">http://climis-southsudan.org</a></center></br></br>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
-    <!-- <link rel="stylesheet" href="assets/css/main.css" /> -->
-    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-    <!-- <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript> -->
 
     <!-- load script libraries -->
-    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -37,40 +31,6 @@
       <div id="Chart3" style="width: 100%;height: 190px; margin-left: auto; margin-right: auto"></div>
       <div id="Chart4" style="width: 100%;height: 190px; margin-left: auto; margin-right: auto"></div>
   </div>
-
-    <!-- call JavaScript libraries -->
-    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> -->
-
-    <!-- based on w3schools.com PHP - AJAX and MySQL tutorial -> https://www.w3schools.com/php/php_ajax_database.asp -->
-    <script>
-    // receive user input from HTML page
-// function showList(str) {
-//     if (str == "") {
-//         document.getElementById("txtHint").innerHTML = "";
-//         return;
-//     } else {
-//     // create XMLHttpRequest object
-//         if (window.XMLHttpRequest) {
-//             // code for IE7+, Firefox, Chrome, Opera, Safari
-//             xmlhttp = new XMLHttpRequest();
-//         } else {
-//             // code for IE6, IE5
-//             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-//         }
-//         // function is executed when the server response is ready
-//         xmlhttp.onreadystatechange = function() {
-//             if (this.readyState == 4 && this.status == 200) {
-//                 document.getElementById("txtHint").innerHTML = this.responseText;
-//             }
-//         };
-//         // opens PHP file that queries the SQL database
-//         // q is added to the URL, which contains the user's requested content of the dropdown list
-//         // sends the request (user response) to the server
-// xmlhttp.open("GET","cPanel_mySQL_connect.php?q="+str,true);
-//         xmlhttp.send();
-//     }
-// }
-</script>
 </head>
 
 <body>
@@ -79,7 +39,8 @@
     /**
      * In order to synchronize tooltips and crosshairs, override the
      * built-in events with handlers defined on the parent element.
-     * (Modified from Highcharts API documentation to add indexing)*/
+     * (Modified from Highcharts API documentation to add indexing for JSON arrays)
+     **/
     $('#syncChart>div').bind('mousemove touchmove touchstart', function(e) {
         var chart,
             point,
@@ -105,25 +66,23 @@
 
     /**
      * Override the reset function, we don't need to hide the tooltips and crosshairs.
-     */
+     **/
     Highcharts.Pointer.prototype.reset = function() {
         return undefined;
     };
 
     /**
      * Highlight a point by showing tooltip, setting hover state and draw crosshair
-     */
+     **/
     Highcharts.Point.prototype.highlight = function(event) {
         this.onMouseOver(); // Show the hover marker
         // this.series.chart.tooltip.refresh(this); // Show the tooltip, this breaks when more than one series is added per plot (more than one series is sharing the tooltip)
         this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
     };
 
-
-
     /**
-     * Synchronize zooming through the setExtremes event handler.
-     */
+     * Synchronize through the setExtremes event handler.
+     **/
     function syncExtremes(e) {
         var thisChart = this.chart;
 
@@ -140,6 +99,10 @@
         }
     };
 
+
+    /**
+     * Chart1
+     **/
     $.getJSON("MINT_Sorghum_Production_Baseline.json").done(function(rawData) {
         var data = []
         $.each(rawData, function(index, item) {
@@ -202,9 +165,12 @@
                 color: '#18770b'  // green
             }],
         });
-      })
+    })  // end Chart1
 
 
+    /**
+     * Chart2
+     **/
     $.getJSON("CLIMIS_WFPchickpea_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
         var data = []
         $.each(rawData, function(index, item) {
@@ -222,7 +188,6 @@
                 })
         Highcharts.chart('Chart2', {
             chart: {
-                // type: 'column',
                 zoomType: 'x'
             },
             title: {
@@ -291,140 +256,149 @@
                 fillOpacity: 0.4
             }],
         });
-      })
-      })
-      })
+    })
+    })
+    })  //end Chart2
 
-      $.getJSON("CYCLESsorghum_BaselinePrecipitation.json").done(function(rawData) {
-          var data = []
-          $.each(rawData, function(index, item) {
-              data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-          })
-          Highcharts.chart('Chart3', {
-              title: {
-                  text: 'Precipitation'
-              },
-              subtitle: {
-                  text: 'CYCLES Model Output'
-              },
-              chart: {
-                  type: 'column',
-                  zoomType: 'x'
-              },
-              xAxis: {
-                  type: 'datetime',
-                  title: {
-                      text: 'Date',
-                      style: {
-                          fontSize: '12px'
-                      },
-                  },
-                  crosshair: true,
-                  showFirstLabel: true,
-                  showLastLabel: true,
-                  tickPosition: 'inside',
 
-                  labels: {
-                      style: {
-                          fontSize: '12px'
-                      }
-                  },
-              },
-              yAxis: {
-                  title: {
-                      text: 'mm',
-                      style: {
-                          fontSize: '12px'
-                      },
-                  },
-              },
-              credits: {
-                  enabled: false
-              },
-              legend: {
-                  enabled: false
-              },
-              tooltip: {
-                  positioner: function() {
-                      return {
-                          x: this.chart.chartWidth - this.label.width - 10, // right aligned
-                          y: 5
-                      };
-                      relativeTo: 'Chart3'
-                  },
-                  shared: true,
-                  valueDecimals: 1
-              },
-              series: [{
-                  name: 'Precipitation',
-                  data: data,
-                  lineWidth: 1,
-                  color: '#0e9ba0'  // teal
-              }],
-          });
+    /**
+     * Chart3
+     **/
+    $.getJSON("CYCLESsorghum_BaselinePrecipitation.json").done(function(rawData) {
+        var data = []
+        $.each(rawData, function(index, item) {
+            data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
         })
+        Highcharts.chart('Chart3', {
+            title: {
+                text: 'Precipitation'
+            },
+            subtitle: {
+                text: 'CYCLES Model Output'
+            },
+            chart: {
+                type: 'column',
+                zoomType: 'x'
+            },
+            xAxis: {
+                type: 'datetime',
+                title: {
+                    text: 'Date',
+                    style: {
+                        fontSize: '12px'
+                    },
+                },
+                crosshair: true,
+                showFirstLabel: true,
+                showLastLabel: true,
+                tickPosition: 'inside',
 
-      $.getJSON("CYCLESsorghum_BaselineAvgTemp.json").done(function(rawData) {
-          var data = []
-          $.each(rawData, function(index, item) {
-              data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
-          })
-          Highcharts.chart('Chart4', {
-              chart: {
-                  zoomType: 'x'
-              },
-              title: {
-                  text: 'Average Temperature'
-              },
-              subtitle: {
-                  text: 'CYCLES Model Output'
-              },
-              xAxis: {
-                  type: 'datetime',
-                  crosshair: true,
-                  showFirstLabel: true,
-                  showLastLabel: true,
-                  tickPosition: 'inside',
-                  labels: {
-                      style: {
-                          fontSize: '12px'
-                      }
-                  },
-              },
-              yAxis: {
-                  title: {
-                      text: 'Degrees Celcium',
-                      style: {
-                          fontSize: '11px'
-                      },
-                  },
-              },
-              tooltip: {
-                  positioner: function() {
-                      return {
-                          x: this.chart.chartWidth - this.label.width - 10, // right aligned
-                          y: 5
-                      };
-                      relativeTo: 'Chart4'
-                  },
-                  shared: true,
-                  valueDecimals: 1
-              },
-              legend: {
-                  enabled: false
-              },
-              // credits: {   // show credits on last chart, can add text like MINT Project copyright info or something of the like
-              //     enabled: false
-              // },
-              series: [{
-                  name: 'Temperature',
-                  data: data,
-                  lineWidth: 1,
-                  color: '#f46b42'  // orangered
-              }],
-          });
+                labels: {
+                    style: {
+                        fontSize: '12px'
+                    }
+                },
+            },
+            yAxis: {
+                title: {
+                    text: 'mm',
+                    style: {
+                        fontSize: '12px'
+                    },
+                },
+            },
+            credits: {
+                enabled: false
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                positioner: function() {
+                    return {
+                        x: this.chart.chartWidth - this.label.width - 10, // right aligned
+                        y: 5
+                    };
+                    relativeTo: 'Chart3'
+                },
+                shared: true,
+                valueDecimals: 1
+            },
+            series: [{
+                name: 'Precipitation',
+                data: data,
+                lineWidth: 1,
+                color: '#0e9ba0'  // teal
+            }],
+        });
+    })  // end Chart3
+
+
+    /**
+     * Chart4
+     **/
+    $.getJSON("CYCLESsorghum_BaselineAvgTemp.json").done(function(rawData) {
+        var data = []
+        $.each(rawData, function(index, item) {
+            data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
         })
-  });
+        Highcharts.chart('Chart4', {
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: 'Average Temperature'
+            },
+            subtitle: {
+                text: 'CYCLES Model Output'
+            },
+            xAxis: {
+                type: 'datetime',
+                crosshair: true,
+                showFirstLabel: true,
+                showLastLabel: true,
+                tickPosition: 'inside',
+                labels: {
+                    style: {
+                        fontSize: '12px'
+                    }
+                },
+            },
+            yAxis: {
+                title: {
+                    text: 'Degrees Celcium',
+                    style: {
+                        fontSize: '11px'
+                    },
+                },
+            },
+            tooltip: {
+                positioner: function() {
+                    return {
+                        x: this.chart.chartWidth - this.label.width - 10, // right aligned
+                        y: 5
+                    };
+                    relativeTo: 'Chart4'
+                },
+                shared: true,
+                valueDecimals: 1
+            },
+            legend: {
+                enabled: false
+            },
+            // credits: {   // show credits on last chart, can add text like MINT Project copyright info or something of the like
+            //     enabled: false
+            // },
+            series: [{
+                name: 'Temperature',
+                data: data,
+                lineWidth: 1,
+                color: '#f46b42'  // orangered
+            }],
+        });
+    })  // end Chart4
+
+});   // end Synchronize chart
 </script>
 
 </body>
