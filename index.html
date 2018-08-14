@@ -116,7 +116,7 @@
                 text: 'Crop Production'
             },
             subtitle: {
-                text: 'MINT Workflow Output'
+                text: 'MINT Workflow Output'  // source of data
             },
             xAxis: {
                 type: 'datetime',
@@ -132,7 +132,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Mkg',
+                    text: 'Mkg',    // units
                     style: {
                         fontSize: '11px'
                     },
@@ -160,7 +160,7 @@
             },
             series: [{
                 name: 'MINT Sorghum Production',
-                data: data,
+                data: data,   // data variable name must match how it is declared with the jQuery request
                 lineWidth: 1,
                 color: '#18770b'  // green
             }],
