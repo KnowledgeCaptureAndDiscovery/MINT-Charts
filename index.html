@@ -171,7 +171,7 @@
     /**
      * Chart2
      **/
-    $.getJSON("CLIMIS_WFPchickpea_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
+    $.getJSON("CLIMIS_WFPwhiteSorghum_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
         var data = []
         $.each(rawData, function(index, item) {
             data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
@@ -181,7 +181,7 @@
             $.each(rawData, function(index, item) {
                 data1.push([Date.UTC(item[0],item[1],item[2]),item[3]])
             })
-            $.getJSON("CYCLESpeanuts_BaselineAgBiomassKgHa_2012-2017.json").done(function(rawData) {
+            $.getJSON("CLIMIS_WFPchickpea_Malawa35kg_Juba_2012-2017.json").done(function(rawData) {
                 var data2 = []
                 $.each(rawData, function(index, item) {
                     data2.push([Date.UTC(item[0],item[1],item[2]),item[3]])
@@ -216,8 +216,8 @@
                     },
                 },
                 min: 0,
-                max: 2000,
-                tickInterval: 1000   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
+                max: 1000,
+                tickInterval: 500   // helps force y-axis scaling to better fit data when the automatic styling doesn't fit right
             },
             tooltip: {
                 positioner: function() {
@@ -249,7 +249,7 @@
                 color: '#efcf00',   // gold
                 fillOpacity: 0.4
             },{
-                name: 'Cassava',
+                name: 'Peanut',
                 data: data2,
                 lineWidth: 1,
                 color: '#a8124e',   // fuschia
@@ -339,6 +339,7 @@
      **/
     $.getJSON("CYCLESsorghum_BaselineAvgTemp.json").done(function(rawData) {
         var data = []
+
         $.each(rawData, function(index, item) {
             data.push([Date.UTC(item[0],item[1],item[2]),item[3]])
         })
@@ -366,7 +367,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Degrees Celcium',
+                    text: 'Degrees Celcius',
                     style: {
                         fontSize: '11px'
                     },
